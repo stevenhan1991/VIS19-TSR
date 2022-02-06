@@ -8,7 +8,7 @@ Pytorch implementation for TSR-TVD: Temporal Super-Resolution for Time-Varying D
 - Numpy
 - Pytorch >= 0.4.0
 
-## Data preparation
+## Data format
 
 
 ## Training models
