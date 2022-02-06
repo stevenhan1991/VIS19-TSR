@@ -6,7 +6,7 @@ Pytorch implementation for TSR-TVD: Temporal Super-Resolution for Time-Varying D
 - CUDA >= 10.0
 - Python >= 3.6
 - Numpy
-- Pytorch = 0.4.0
+- Pytorch >= 0.4.0
 
 ## Data preparation
 
