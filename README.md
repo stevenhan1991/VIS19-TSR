@@ -10,8 +10,7 @@ Pytorch implementation for TSR-TVD: Temporal Super-Resolution for Time-Varying D
 
 ## Data format
 
-Each volumetric data is saved as a .dat file with little endian.
-
+Each volumetric data is saved as a .dat file with little endian. The data is stored as in column-major order, that is z-axis goes first, then y-axis, finally x-axis.
 
 ## Training models
 ```
