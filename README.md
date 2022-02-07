@@ -1,5 +1,5 @@
 # TSR-TVD: Temporal Super-Resolution for Time-Varying Data Analysis and Visualization
-Pytorch implementation for TSR-TVD: Temporal Super-Resolution for Time-Varying Data Analysis and Visualization
+Pytorch implementation for TSR-TVD: Temporal Super-Resolution for Time-Varying Data Analysis and Visualization.
 
 # Notation
 Compared with the original implementation, we add skip connection between encoder and decoder, which can improve the performance.
@@ -7,7 +7,7 @@ Compared with the original implementation, we add skip connection between encode
 ## Prerequisites
 - Linux
 - CUDA >= 10.0
-- Python >= 3.6
+- Python >= 3.7
 - Numpy
 - Pytorch >= 1.0
 
