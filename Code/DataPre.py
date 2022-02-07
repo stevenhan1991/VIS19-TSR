@@ -8,7 +8,7 @@ class DataSet():
 		self.dim = [args.x,args.y,args.z]
 		self.c = [args.crop_x,args.crop_y,args.crop_z]
 		self.total_samples = args.total_samples
-		self.training_samples = args.training_samples
+		self.training_samples = args.total_samples*4//10
 		self.interval = args.interval
 		self.data = np.zeros((self.total_samples,1,self.dim[0],self.dim[1],self.dim[2]))
 		self.croptimes = args.croptimes
@@ -16,7 +16,7 @@ class DataSet():
 			self.croptimes = 1
 
 	def ReadData(self):
-		for i in range(1,self.total_samples+1):
+		for i in range(1,self.training_samples+1):
 			v = np.fromfile(args.data_path+'{:04d}'.format(i)+'.dat',dtype='<f')
 			v = v.reshape(self.dim[2],self.dim[1],self.dim[0]).transpose()
 			v = 2*(v-v.min())/(v.max()-v.min())-1
