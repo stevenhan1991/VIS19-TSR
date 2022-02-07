@@ -39,9 +39,9 @@ parser.add_argument('--critic', type=int, default=1, metavar='N',
                     help='number of updating discriminator per updating generator')
 parser.add_argument('--l2', type=float, default=1.0, metavar='N',
                     help='weight of l2 loss')
-parser.add_argument('--percep', type=float, default=1e-3, metavar='N',
+parser.add_argument('--percep', type=float, default=5e-2, metavar='N',
                     help='weight of preceptual loss')
-parser.add_argument('--adversarial', type=float, default=5e-2, metavar='N',
+parser.add_argument('--adversarial', type=float, default=1e-3, metavar='N',
                     help='weight of adversarial loss')
 parser.add_argument('--mode', type=str, default='train', metavar='N',
                     help='train or infer model')
