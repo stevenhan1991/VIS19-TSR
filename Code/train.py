@@ -70,22 +70,21 @@ def trainGAN(G,D,args,dataset):
         	torch.save(G,args.model_path+str(itera)+'.pth')
 
 def inference(model,scalar,args):
-	for i in range(0,len(scalar.data),args.interval+1):
+	for i in range(0,len(scalar.data)-1):
 		s = np.zeros((1,1,scalar.dim[0],scalar.dim[1],scalar.dim[2]))
 		e = np.zeros((1,1,scalar.dim[0],scalar.dim[1],scalar.dim[2]))
-		if (i+args.interval+1)<len(scalar.data):
-			s[0] = scalar.data[i]
-			e[0] = scalar.data[i+args.interval+1]
-			s = torch.FloatTensor(s).cuda()
-			e = torch.FloatTensor(e).cuda()
-			with torch.no_grad():
-				intermerdiate = model(torch.cat((s,e),dim=1))
-				intermerdiate = intermerdiate.cpu().detach().numpy()
-			for j in range(1,args.interval+1):
-				data = intermerdiate[j-1]
-				data = np.asarray(data,dtype='<f')
-				data = data.flatten('F')
-				data.tofile(args.result_path+'{:04d}'.format(i+j+1)+'.dat',format='<f')
+		s[0] = scalar.data[i]
+		e[0] = scalar.data[i+1]
+		s = torch.FloatTensor(s).cuda()
+		e = torch.FloatTensor(e).cuda()
+		with torch.no_grad():
+			intermerdiate = model(torch.cat((s,e),dim=1))
+			intermerdiate = intermerdiate.cpu().detach().numpy()
+		for j in range(1,args.interval+1):
+			data = intermerdiate[j-1]
+			data = np.asarray(data,dtype='<f')
+			data = data.flatten('F')
+			data.tofile(args.result_path+'{:04d}'.format((agrs.interval+1)*i+j+1)+'.dat',format='<f')
 
 def concatsubvolume(model,data,win_size,args):
 	x,y,z = data[0].size()[2],data[0].size()[3],data[0].size()[4]

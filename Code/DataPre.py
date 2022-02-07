@@ -10,7 +10,7 @@ class DataSet():
 		self.total_samples = args.total_samples
 		self.training_samples = args.total_samples*4//10
 		self.interval = args.interval
-		self.data = np.zeros((self.total_samples,1,self.dim[0],self.dim[1],self.dim[2]))
+		self.data = np.zeros((self.training_samples,1,self.dim[0],self.dim[1],self.dim[2]))
 		self.croptimes = args.croptimes
 		if (self.dim[0] == self.c[0]) and (self.dim[1] == self.c[1]) and (self.dim[2] == self.c[2]):
 			self.croptimes = 1
@@ -41,6 +41,13 @@ class DataSet():
 		data = torch.utils.data.TensorDataset(s,i,e)
 		train_loader = DataLoader(dataset=data, batch_size=1, shuffle=True)
 		return train_loader
+
+	def InferenceData(self):
+		for i in range(1,self.total_samples,self.interval+1):
+			v = np.fromfile(args.data_path+'{:04d}'.format(i)+'.dat',dtype='<f')
+			v = v.reshape(self.dim[2],self.dim[1],self.dim[0]).transpose()
+			v = 2*(v-v.min())/(v.max()-v.min())-1
+			self.data[i-1] = v
 
 	def CropData(self,data):
 		s = []

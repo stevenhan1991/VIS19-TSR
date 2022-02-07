@@ -46,7 +46,7 @@ parser.add_argument('--adversarial', type=float, default=1e-3, metavar='N',
 parser.add_argument('--mode', type=str, default='train', metavar='N',
                     help='train or infer model')
 parser.add_argument('--data_path', type=str, default='../data/', metavar='N',
-                    help='the path where we read the scalar data')
+                    help='the path where we read the vector data')
 parser.add_argument('--model_path', type=str, default='../model/', metavar='N',
                     help='the path where we stored the saved model')
 parser.add_argument('--result_path', type=str, default='../result/', metavar='N',
@@ -58,7 +58,6 @@ args.cuda = not args.no_cuda and torch.cuda.is_available()
 
 def main():
     ScalarData = DataSet(args)
-    ScalarData.ReadData()
     if args.mode == 'train':
         model = TSR(2,1,args.init_channels,args.interval)
         Discriminator = Dis(args.interval)
@@ -67,11 +66,13 @@ def main():
             Discriminator = Discriminator.cuda()
         model.apply(weights_init_kaiming)
         Discriminator(weights_init_kaiming)
+        ScalarData.ReadData()
         trainGAN(model,Discriminator,args,ScalarData)
     elif args.mode == 'infer':
         model = torch.load(args.model_path+str(args.epochs)+'.pth',map_location=lambda storage, loc:storage)
         if args.cuda:
             model.cuda()
+        ScalarData.InferenceData()
         inference(model,ScalarData,args)
 
 if __name__== "__main__":
