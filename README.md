@@ -14,7 +14,7 @@ The volume at each time step is saved as a .dat file with the little-endian form
 
 ## Training models
 ```
-cd code 
+cd Code 
 ```
 
 - training
