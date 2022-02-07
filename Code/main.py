@@ -46,7 +46,7 @@ parser.add_argument('--adversarial', type=float, default=1e-3, metavar='N',
 parser.add_argument('--mode', type=str, default='train', metavar='N',
                     help='train or infer model')
 parser.add_argument('--data_path', type=str, default='../data/', metavar='N',
-                    help='the path where we read the vector data')
+                    help='the path where we read the scalar data')
 parser.add_argument('--model_path', type=str, default='../model/', metavar='N',
                     help='the path where we stored the saved model')
 parser.add_argument('--result_path', type=str, default='../result/', metavar='N',
